@@ -1,51 +1,62 @@
-const Header = ({ course }) => <h1>{course}</h1>
+const Header = ({ name }) => <h1>{name}</h1>
 
-const Part = ({ name, exercises }) => (
+const Part = ({ part }) => (
   <p>
-    {name} {exercises}
+    {part.name} {part.exercises}
   </p>
 )
 
-const Content = ({
-  part1,
-  exercises1,
-  part2,
-  exercises2,
-  part3,
-  exercises3,
-}) => (
+const Content = ({ parts }) => (
   <div>
-    <Part name={part1} exercises={exercises1} />
-    <Part name={part2} exercises={exercises2} />
-    <Part name={part3} exercises={exercises3} />
+    {parts.map((part) => (
+      <Part key={part.id} part={part} />
+    ))}
   </div>
 )
 
-const Total = ({ total }) => <p>Number of exercises {total}</p>
+const Total = ({ total }) => <strong>Number of exercises {total}</strong>
 
-const App = () => {
-  const course = 'Half Stack application development'
-  const part1 = 'Fundamentals of React'
-  const exercises1 = 10
-  const part2 = 'Using props to pass data'
-  const exercises2 = 7
-  const part3 = 'State of a component'
-  const exercises3 = 14
+const Course = ({ course }) => {
+  const total = course.parts.reduce((total, part) => total + part.exercises, 0)
 
   return (
     <div>
-      <Header course={course} />
-      <Content
-        part1={part1}
-        exercises1={exercises1}
-        part2={part2}
-        exercises2={exercises2}
-        part3={part3}
-        exercises3={exercises3}
-      />
-      <Total total={exercises1 + exercises2 + exercises3} />
+      <Header name={course.name} />
+      <Content parts={course.parts} />
+      <Total total={total} />
     </div>
   )
+}
+
+const App = () => {
+  const course = {
+    id: 1,
+    name: 'Half Stack application development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10,
+        id: 1,
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7,
+        id: 2,
+      },
+      {
+        name: 'State of a component',
+        exercises: 14,
+        id: 3,
+      },
+      {
+        name: 'Redux',
+        exercises: 11,
+        id: 4,
+      },
+    ],
+  }
+
+  return <Course course={course} />
 }
 
 export default App
