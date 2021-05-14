@@ -1,4 +1,4 @@
-const Header = ({ name }) => <h1>{name}</h1>
+const Header = ({ name }) => <h2>{name}</h2>
 
 const Part = ({ part }) => (
   <p>
@@ -14,7 +14,7 @@ const Content = ({ parts }) => (
   </div>
 )
 
-const Total = ({ total }) => <strong>Number of exercises {total}</strong>
+const Total = ({ total }) => <strong>total of {total} exercises</strong>
 
 const Course = ({ course }) => {
   const total = course.parts.reduce((total, part) => total + part.exercises, 0)
@@ -29,34 +29,58 @@ const Course = ({ course }) => {
 }
 
 const App = () => {
-  const course = {
-    id: 1,
-    name: 'Half Stack application development',
-    parts: [
-      {
-        name: 'Fundamentals of React',
-        exercises: 10,
-        id: 1,
-      },
-      {
-        name: 'Using props to pass data',
-        exercises: 7,
-        id: 2,
-      },
-      {
-        name: 'State of a component',
-        exercises: 14,
-        id: 3,
-      },
-      {
-        name: 'Redux',
-        exercises: 11,
-        id: 4,
-      },
-    ],
-  }
+  const courses = [
+    {
+      id: 1,
+      name: 'Half Stack application development',
+      parts: [
+        {
+          name: 'Fundamentals of React',
+          exercises: 10,
+          id: 1,
+        },
+        {
+          name: 'Using props to pass data',
+          exercises: 7,
+          id: 2,
+        },
+        {
+          name: 'State of a component',
+          exercises: 14,
+          id: 3,
+        },
+        {
+          name: 'Redux',
+          exercises: 11,
+          id: 4,
+        },
+      ],
+    },
+    {
+      id: 2,
+      name: 'Node.js',
+      parts: [
+        {
+          name: 'Routing',
+          exercises: 3,
+          id: 1,
+        },
+        {
+          name: 'Middlewares',
+          exercises: 7,
+          id: 2,
+        },
+      ],
+    },
+  ]
 
-  return <Course course={course} />
+  return (
+    <div>
+      {courses.map((course) => (
+        <Course key={course.id} course={course} />
+      ))}
+    </div>
+  )
 }
 
 export default App
