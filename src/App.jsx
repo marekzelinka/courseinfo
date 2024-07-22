@@ -1,25 +1,17 @@
 function App() {
   let course = 'Half Stack application development'
-  let part1 = 'Fundamentals of React'
-  let exercises1 = 10
-  let part2 = 'Using props to pass data'
-  let exercises2 = 7
-  let part3 = 'State of a component'
-  let exercises3 = 14
+  let part1 = { name: 'Fundamentals of React', exercises: 10 }
+  let part2 = { name: 'Using props to pass data', exercises: 7 }
+  let part3 = { name: 'State of a component', exercises: 14 }
 
   return (
     <>
       <Header course={course} />
       <main>
-        <Content
-          part1={part1}
-          exercises1={exercises1}
-          part2={part2}
-          exercises2={exercises2}
-          part3={part3}
-          exercises3={exercises3}
+        <Content part1={part1} part2={part2} part3={part3} />
+        <Total
+          totalExercises={part1.exercises + part2.exercises + part3.exercises}
         />
-        <Total totalExercises={exercises1 + exercises2 + exercises3} />
       </main>
     </>
   )
@@ -38,9 +30,9 @@ function Header(props) {
 function Content(props) {
   return (
     <div>
-      <Part name={props.part1} exercises={props.exercises1} />
-      <Part name={props.part2} exercises={props.exercises2} />
-      <Part name={props.part3} exercises={props.exercises3} />
+      <Part name={props.part1.name} exercises={props.part1.exercises} />
+      <Part name={props.part2.name} exercises={props.part2.exercises} />
+      <Part name={props.part3.name} exercises={props.part3.exercises} />
     </div>
   )
 }
