@@ -9,7 +9,35 @@ function App() {
 
   return (
     <>
-      <h1>{course}</h1>
+      <Header course={course} />
+      <main>
+        <Content
+          part1={part1}
+          exercises1={exercises1}
+          part2={part2}
+          exercises2={exercises2}
+          part3={part3}
+          exercises3={exercises3}
+        />
+        <Total totalExercises={exercises1 + exercises2 + exercises3} />
+      </main>
+    </>
+  )
+}
+
+export default App
+
+function Header(props) {
+  return (
+    <header>
+      <h1>{props.course}</h1>
+    </header>
+  )
+}
+
+function Content({ part1, exercises1, part2, exercises2, part3, exercises3 }) {
+  return (
+    <>
       <p>
         {part1} {exercises1}
       </p>
@@ -19,9 +47,10 @@ function App() {
       <p>
         {part3} {exercises3}
       </p>
-      <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
     </>
   )
 }
 
-export default App
+function Total({ totalExercises }) {
+  return <p>Number of exercises {totalExercises}</p>
+}
