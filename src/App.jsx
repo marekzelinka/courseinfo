@@ -19,6 +19,7 @@ function Course({ course }) {
     <div>
       <Header name={course.name} />
       <Content parts={course.parts} />
+      <Total parts={course.parts} />
     </div>
   )
 }
@@ -43,4 +44,10 @@ function Part({ part }) {
       {part.name} {part.exercises}
     </p>
   )
+}
+
+function Total({ parts }) {
+  let exercisesCount = parts.reduce((total, part) => total + part.exercises, 0)
+
+  return <p style={{ fontWeight: 600 }}>Number of exercises {exercisesCount}</p>
 }
