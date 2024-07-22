@@ -1,57 +1,46 @@
 function App() {
   let course = {
+    id: 1,
     name: 'Half Stack application development',
     parts: [
-      { name: 'Fundamentals of React', exercises: 10 },
-      { name: 'Using props to pass data', exercises: 7 },
-      { name: 'State of a component', exercises: 14 },
+      { id: 1, name: 'Fundamentals of React', exercises: 10 },
+      { id: 2, name: 'Using props to pass data', exercises: 7 },
+      { id: 3, name: 'State of a component', exercises: 14 },
     ],
   }
 
-  return (
-    <>
-      <Header course={course.name} />
-      <main>
-        <Content parts={course.parts} />
-        <Total parts={course.parts} />
-      </main>
-    </>
-  )
+  return <Course course={course} />
 }
 
 export default App
 
-function Header(props) {
-  return (
-    <header>
-      <h1>{props.course}</h1>
-    </header>
-  )
-}
-
-function Content(props) {
+function Course({ course }) {
   return (
     <div>
-      <Part name={props.parts[0].name} exercises={props.parts[0].exercises} />
-      <Part name={props.parts[1].name} exercises={props.parts[1].exercises} />
-      <Part name={props.parts[2].name} exercises={props.parts[2].exercises} />
+      <Header name={course.name} />
+      <Content parts={course.parts} />
     </div>
   )
 }
 
-function Part(props) {
+function Header({ name }) {
+  return <h2>{name}</h2>
+}
+
+function Content({ parts }) {
   return (
-    <p>
-      {props.name} {props.exercises}
-    </p>
+    <div>
+      {parts.map((part) => (
+        <Part key={part.id} part={part} />
+      ))}
+    </div>
   )
 }
 
-function Total(props) {
-  let exercisesTotal =
-    props.parts[0].exercises +
-    props.parts[1].exercises +
-    props.parts[2].exercises
-
-  return <p>Number of exercises {exercisesTotal}</p>
+function Part({ part }) {
+  return (
+    <p>
+      {part.name} {part.exercises}
+    </p>
+  )
 }
