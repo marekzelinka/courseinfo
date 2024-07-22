@@ -35,22 +35,24 @@ function Header(props) {
   )
 }
 
-function Content({ part1, exercises1, part2, exercises2, part3, exercises3 }) {
+function Content(props) {
   return (
-    <>
-      <p>
-        {part1} {exercises1}
-      </p>
-      <p>
-        {part2} {exercises2}
-      </p>
-      <p>
-        {part3} {exercises3}
-      </p>
-    </>
+    <div>
+      <Part name={props.part1} exercises={props.exercises1} />
+      <Part name={props.part2} exercises={props.exercises2} />
+      <Part name={props.part3} exercises={props.exercises3} />
+    </div>
   )
 }
 
-function Total({ totalExercises }) {
-  return <p>Number of exercises {totalExercises}</p>
+function Part(props) {
+  return (
+    <p>
+      {props.name} {props.exercises}
+    </p>
+  )
+}
+
+function Total(props) {
+  return <p>Number of exercises {props.totalExercises}</p>
 }
